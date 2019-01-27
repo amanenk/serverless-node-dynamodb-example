@@ -1,0 +1,43 @@
+<html>
+
+<head>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#submit').click(function () {
+                console.log("click");
+                var sendData = $('#data').val();
+
+                $.ajax({
+                    type: 'PUT',
+                    url: 'https://wayi9eh2na.execute-api.us-east-1.amazonaws.com/dev/email',
+                    dataType: 'json',
+                    data: JSON.stringify({
+                        email: sendData
+                    }),
+                    cache: false,
+                    beforeSend: function (result) {
+                        console.log("before")
+                        // submit.val("Joining...");
+                    },
+                    success: function (result) {
+                        console.log("data sent");
+                        $("#submit").hide();                        
+                        $("#data").hide();
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <form>
+        Data:<br>
+        <input id="data" type="text" name="data"><br>
+        <input id="submit" type="button" value="Submit">
+    </form>
+</body>
+
+</html>
